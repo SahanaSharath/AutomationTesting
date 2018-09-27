@@ -33,4 +33,29 @@ public class Utility {
 			e.printStackTrace();
 		}
 	}
+	
+	public static String getXLData(String path, String sheet, int r, int c) {
+		
+		String v="";
+		try {
+			Workbook w = WorkbookFactory.create(new FileInputStream(path));
+			v = w.getSheet(sheet).getRow(r).getCell(c).toString();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return v;
+	}
+	
+	public static int getXLRowCount(String path, String sheet) {
+		int count = 0;
+		try {
+			Workbook w = WorkbookFactory.create(new FileInputStream(path));
+			count=w.getSheet(sheet).getLastRowNum();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
 }
