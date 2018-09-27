@@ -1,11 +1,17 @@
 package generic;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.Date;
 import java.util.Properties;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 public class Utility {
 
@@ -57,5 +63,27 @@ public class Utility {
 			e.printStackTrace();
 		}
 		return count;
+	}
+	
+	public static String getPhoto(WebDriver driver, String folder) {
+		
+		Date d = new Date();
+		String dateTime = d.toString().replaceAll(":", "_");
+		String path = folder+"/"+dateTime+".png";
+		try {
+			TakesScreenshot t = (TakesScreenshot)driver;
+			File srcFile = t.getScreenshotAs(OutputType.FILE);
+			File destFile = new File(path);
+			//Below line did not get any error
+			//If we get it means jar file has not got imported
+			//if Dependencies doesn't work, download the jar from below link & copy - paste it
+			//http://www.java32.com/Code/Jar/c/Downloadcommonsio32jar.html
+			//Some cases even if have Selenium standalone jar file imported 
+			FileUtils.copyFile(srcFile, destFile);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return path;
 	}
 }

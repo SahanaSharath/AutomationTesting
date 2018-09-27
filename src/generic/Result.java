@@ -25,6 +25,8 @@ public class Result implements ITestListener,IAutoConst {
 	public void onTestFailure(ITestResult result) {
 		// TODO Auto-generated method stub
 		failCount++;
+		//String p = Utility.getPhoto(driver, PHOTO_PATH);
+		//Reporter.log("Photo: "+p,true);
 	}
 
 	@Override

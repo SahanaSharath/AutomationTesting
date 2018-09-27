@@ -4,11 +4,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 
+//In the back ground Result.java class will be executing
 @Listeners(Result.class)
 abstract public class BaseTest implements IAutoConst {
 	public WebDriver driver;
@@ -32,9 +34,17 @@ abstract public class BaseTest implements IAutoConst {
 	}
 	
 	@AfterMethod
-	public void closeApplication() {
-		Reporter.log("close Application",true);
-		driver.close();
+	public void closeApplication(ITestResult result) {
+		String name = result.getName();
+		int status = result.getStatus();
+		if (status == 2) {
+			Utility.getPhoto(driver, PHOTO_PATH);
+			Reporter.log("Test Method: "+name+" is FAILED & photo is "+PHOTO_PATH,true);
+		}
+		else {
+			Reporter.log("Test Method: "+name+" is PASSED & NO photo",true);
+		}
+		driver.quit();
 	}
 }
 
