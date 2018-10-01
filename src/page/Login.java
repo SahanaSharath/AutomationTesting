@@ -19,6 +19,8 @@ public class Login {
 		private WebElement loginBTN;
 		
 		//private WebDriver driver;
+		//If u need to use multiple times "driver" the declare a global variable
+		//If not, directly pass it to the class constructor
 		
 		//Initialization
 		

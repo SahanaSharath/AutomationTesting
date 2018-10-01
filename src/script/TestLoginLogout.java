@@ -8,16 +8,16 @@ import generic.Utility;
 import page.HomePage;
 import page.Login;
 
-public class TestDemo extends BaseTest{
+public class TestLoginLogout extends BaseTest{
 	
 	@Test(priority=1,groups= {"login","smoke"})
 	public void testA() {
 		Reporter.log("testA",true);
 		
-		String data = Utility.getXLData(INPUT_PATH, "sheet1", 0, 0);
+		String data = Utility.getXLData(INPUT_PATH, "TestLoginLogout", 0, 0);
 		Reporter.log("Data:"+data,true);
 		
-		int r = Utility.getXLRowCount(INPUT_PATH, "sheet1");
+		int r = Utility.getXLRowCount(INPUT_PATH, "TestLoginLogout");
 		Reporter.log("Row: "+r,true);
 		
 		Login l = new Login(driver);
@@ -28,7 +28,7 @@ public class TestDemo extends BaseTest{
 		//System.out.println(usrName);
 		l.setUserName(usrName);
 		
-		String pwd = Utility.getXLData(INPUT_PATH, "sheet1", 1, 1);
+		String pwd = Utility.getXLData(INPUT_PATH, "TestLoginLogout", 1, 1);
 		//System.out.println(pwd);
 		l.setPwdName(pwd);
 		

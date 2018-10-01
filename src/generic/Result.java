@@ -50,7 +50,7 @@ public class Result implements ITestListener,IAutoConst {
 	@Override
 	public void onFinish(ITestContext context) {
 		// TODO Auto-generated method stub
-		Utility.writeResultToXL(SUMMARY_PATH,"sheet1", passCount, failCount);
+		Utility.writeResultToXL(SUMMARY_PATH,"TestLoginLogout", passCount, failCount);
 	}
 	
 }
