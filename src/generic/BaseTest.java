@@ -3,12 +3,13 @@ package generic;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 //In the back ground Result.java class will be executing
 @Listeners(Result.class)
@@ -16,6 +17,7 @@ abstract public class BaseTest implements IAutoConst {
 	public WebDriver driver;
 	
 	public String url = Utility.getPropertyValue(CONFIG_PATH, "URL");
+	//public String url = URL_PATH; --->???
 	String ITO = Utility.getPropertyValue(CONFIG_PATH, "ITO");
 	public long duration = Long.parseLong(ITO);
 	//public long duration = 10;
@@ -25,9 +27,12 @@ abstract public class BaseTest implements IAutoConst {
 		System.setProperty(GECKO_KEY, GECKO_VAL);
 	}
 
+	@Parameters({"ip","browser"})
 	@BeforeMethod
-	public void openApplication() {
-		driver = new ChromeDriver();
+	public void openApplication(@Optional("localhost")String ip, @Optional("chrome")String browser) {
+		//driver = new ChromeDriver();
+		//driver=Utility.openBrowser(driver, "localhost", "chrome");
+		driver=Utility.openBrowser(driver, ip, browser);
 		driver.manage().timeouts().implicitlyWait(duration, TimeUnit.SECONDS);
 		driver.get(url);
 		Reporter.log("open Application",true);
@@ -44,7 +49,7 @@ abstract public class BaseTest implements IAutoConst {
 		else {
 			Reporter.log("Test Method: "+name+" is PASSED & NO photo",true);
 		}
-		driver.quit();
+		//driver.quit();
 	}
 }
 

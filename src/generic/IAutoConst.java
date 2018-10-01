@@ -9,8 +9,8 @@ public interface IAutoConst {
 	String GECKO_VAL = "./driver/geckodriver.exe";
 	
 	String CONFIG_PATH = "./config.properties";
-	String SUMMARY_PATH = "./result/NewSummary.xlsx";
 	
+	String SUMMARY_PATH = "./result/NewSummary.xlsx";
 	String INPUT_PATH = "./data/input.xlsx";
 	String PHOTO_PATH = "./photo";
 }
